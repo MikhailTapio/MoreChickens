@@ -8,6 +8,7 @@ import cn.evolvefield.mods.morechickens.common.data.ChickenRegistry;
 import cn.evolvefield.mods.morechickens.common.entity.BaseChickenEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.IReorderingProcessor;
 import net.minecraft.util.ResourceLocation;
@@ -35,19 +36,20 @@ public class RoostScreen extends ScreenBase<RoostContainer> {
     @Override
     protected void renderLabels(@NotNull MatrixStack matrixStack, int mouseX, int mouseY) {
         drawString(matrixStack,font,new TranslationTextComponent("container.chickens.roost"),4,4,FONT_COLOR);
-        int x = getGuiLeft();
-        int y = (height - getYSize()) / 2;
+        final int x = getGuiLeft();
+        final int y = (height - getYSize()) / 2;
 
 
 
         if (mouseX > x + 69 && mouseX < x + 95 && mouseY > y + 31 && mouseY < y + 46) {
-            List<IReorderingProcessor> tooltip = new ArrayList<>();
+            final List<IReorderingProcessor> tooltip = new ArrayList<>();
             tooltip.add(new StringTextComponent(this.menu.getFormattedProgress()).getVisualOrderText());
             renderTooltip(matrixStack, tooltip, mouseX - x, mouseY - y);
         }
         if (mouseX > x + 31 && mouseX < x + 49 && mouseY > y + 32 && mouseY < y + 50) {
-            List<IReorderingProcessor> tooltip = new ArrayList<>();
-            tooltip.add(new TranslationTextComponent("text.chickens.name."+((BaseChickenEntity)this.menu.tileRoost.getChickenEntity()).getChickenName()).getVisualOrderText());
+            final List<IReorderingProcessor> tooltip = new ArrayList<>();
+            final AnimalEntity a = this.menu.tileRoost.getChickenEntity();
+            if (a!=null) tooltip.add(new TranslationTextComponent("text.chickens.name."+((BaseChickenEntity)a).getChickenName()).getVisualOrderText());
             renderTooltip(matrixStack, tooltip, mouseX - x, mouseY - y);
         }
 
@@ -59,9 +61,8 @@ public class RoostScreen extends ScreenBase<RoostContainer> {
         if (this.minecraft != null){
             RenderSystem.clearColor(1.0F, 1.0F, 1.0F, 1.0F);
             this.minecraft.getTextureManager().bind(BACKGROUND);
-
-            int x = getGuiLeft();
-            int y = (height - getYSize()) / 2;
+            final int x = getGuiLeft();
+            final int y = (height - getYSize()) / 2;
             GuiUtils.drawTexturedModalRect(matrixStack,x, y, 0, 0, getXSize(), getYSize(),100);
             GuiUtils.drawTexturedModalRect(matrixStack,x + 69, y + 31, 176, 0, getProgressWidth(), 12,100);
             if (this.menu.tileRoost.hasChickenItem()){

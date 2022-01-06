@@ -7,6 +7,7 @@ import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public abstract class ContainerBase extends Container {
@@ -14,7 +15,7 @@ public abstract class ContainerBase extends Container {
     protected IInventory inventory;
     protected IInventory playerInventory;
 
-    public ContainerBase(@Nullable ContainerType<?> containerType, int id, IInventory playerInventory, IInventory inventory) {
+    public ContainerBase(@Nullable ContainerType<?> containerType, int id, IInventory playerInventory, @Nonnull IInventory inventory) {
         super(containerType, id);
         this.playerInventory = playerInventory;
         this.inventory = inventory;
@@ -60,12 +61,13 @@ public abstract class ContainerBase extends Container {
         return this.playerInventory;
     }
 
+    @Nonnull
     @Override
-    public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
+    public ItemStack quickMoveStack(@Nonnull PlayerEntity playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
         if (slot != null && slot.hasItem()) {
-            ItemStack stack = slot.getItem();
+            final ItemStack stack = slot.getItem();
             itemstack = stack.copy();
             if (index < this.getInventorySize()) {
                 if (!this.moveItemStackTo(stack, this.getInventorySize(), this.slots.size(), true)) {
@@ -86,12 +88,12 @@ public abstract class ContainerBase extends Container {
     }
 
     @Override
-    public boolean stillValid(PlayerEntity player) {
-        return this.inventory == null ? true : this.inventory.stillValid(player);
+    public boolean stillValid(@Nonnull PlayerEntity player) {
+        return this.inventory == null || this.inventory.stillValid(player);
     }
 
     @Override
-    public void removed(PlayerEntity player) {
+    public void removed(@Nonnull PlayerEntity player) {
         super.removed(player);
         if (this.inventory != null) {
             this.inventory.stopOpen(player);

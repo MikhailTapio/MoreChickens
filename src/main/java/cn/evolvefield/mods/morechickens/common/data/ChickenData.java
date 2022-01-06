@@ -16,7 +16,7 @@ import static cn.evolvefield.mods.morechickens.common.data.ChickenRegistry.Pairi
 
 public class ChickenData {
 
-    public String name;
+    public final String name;
     //common
     public String layItem;
     public String deathItem;
@@ -24,14 +24,14 @@ public class ChickenData {
     public int layAmount;
     public int layTime;
     //gene
-    public int GAIN;
-    public int GROWTH;
-    public int STRENGTH;
+    public final int GAIN;
+    public final int GROWTH;
+    public final int STRENGTH;
 
     public boolean enabled;
     public String parent1, parent2;
-    protected double weight;
-    public Pair<String, String> parents;
+    protected final double weight;
+    public final Pair<String, String> parents;
     public int tier;
 
     public ChickenData(String name,

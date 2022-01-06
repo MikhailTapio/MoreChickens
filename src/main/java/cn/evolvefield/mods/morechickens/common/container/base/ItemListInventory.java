@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
 import java.util.function.Function;
 
 public class ItemListInventory implements IInventory, ISidedInventory {
-    protected NonNullList<ItemStack> items;
+    protected final NonNullList<ItemStack> items;
     private final Runnable onMarkDirty;
     private final Function<PlayerEntity, Boolean> onIsUsableByPlayer;
 

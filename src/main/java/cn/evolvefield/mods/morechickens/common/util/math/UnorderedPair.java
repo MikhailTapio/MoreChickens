@@ -6,7 +6,8 @@ package cn.evolvefield.mods.morechickens.common.util.math;
  */
 public class UnorderedPair<T> {
 
-    public T first, second;
+    public final T first;
+    public final T second;
 
     public UnorderedPair(T a, T b){
         first = a;

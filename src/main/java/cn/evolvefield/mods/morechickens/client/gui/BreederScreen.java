@@ -60,26 +60,26 @@ public class BreederScreen extends ScreenBase<BreederContainer> {
 
     @Override
     protected void renderBg(@NotNull MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
-        RenderSystem.clearColor(1.0F, 1.0F, 1.0F, 1.0F);
-        assert this.minecraft != null;
-        this.minecraft.getTextureManager().bind(BACKGROUND);
-        int x = getGuiLeft();
-        int y = (height - getYSize()) / 2;
-
-        GuiUtils.drawTexturedModalRect(matrixStack,x, y, 0, 0, getXSize(), getYSize(),100);
-        GuiUtils.drawTexturedModalRect(matrixStack,x + 81, y + 34, 176, 0, getProgressWidth(), 12,100);
-        if (this.menu.breeder.hasChicken1()){
-            ChickenRenderer.render(matrixStack,x + 19,y + 25, ChickenRegistry.Types.get(this.menu.breeder.getChicken1Name()),minecraft);
-            //this.itemRenderer.renderAndDecorateItem(this.menu.breeder.getChicken1(),x + 19 , y + 25 );
-        }
-        if (this.menu.breeder.hasChicken2()){
-            ChickenRenderer.render(matrixStack,x + 19,y + 46, ChickenRegistry.Types.get(this.menu.breeder.getChicken2Name()),minecraft);
-            //this.itemRenderer.renderAndDecorateItem(this.menu.breeder.getChicken2(),x + 19 , y + 46 );
+        if (this.minecraft != null) {
+            RenderSystem.clearColor(1.0F, 1.0F, 1.0F, 1.0F);
+            this.minecraft.getTextureManager().bind(BACKGROUND);
+            final int x = getGuiLeft();
+            final int y = (height - getYSize()) / 2;
+            GuiUtils.drawTexturedModalRect(matrixStack,x, y, 0, 0, getXSize(), getYSize(),100);
+            GuiUtils.drawTexturedModalRect(matrixStack,x + 81, y + 34, 176, 0, getProgressWidth(), 12,100);
+            if (this.menu.breeder.hasChicken1()){
+                ChickenRenderer.render(matrixStack,x + 19,y + 25, ChickenRegistry.Types.get(this.menu.breeder.getChicken1Name()),minecraft);
+                //this.itemRenderer.renderAndDecorateItem(this.menu.breeder.getChicken1(),x + 19 , y + 25 );
+            }
+            if (this.menu.breeder.hasChicken2()){
+                ChickenRenderer.render(matrixStack,x + 19,y + 46, ChickenRegistry.Types.get(this.menu.breeder.getChicken2Name()),minecraft);
+                //this.itemRenderer.renderAndDecorateItem(this.menu.breeder.getChicken2(),x + 19 , y + 46 );
+            }
         }
     }
 
     private int getProgressWidth() {
-        double progress = this.menu.getProgress();
+        final double progress = this.menu.getProgress();
         return progress == 0.0D ? 0 : 1 + (int) (progress * 25);
     }
 }

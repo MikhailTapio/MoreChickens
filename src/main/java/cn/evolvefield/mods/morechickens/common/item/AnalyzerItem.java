@@ -71,7 +71,7 @@ public class AnalyzerItem extends Item {
                 new TranslationTextComponent("text." + MoreChickens.MODID + ".stat.strength", gene.STRENGTH).withStyle(TextFormatting.AQUA),
                 Util.NIL_UUID);
         playerIn.sendMessage(
-                new TranslationTextComponent("text." + MoreChickens.MODID + ".stat.eggTimer", chickenEntity.getLayTimer() / 1200f).withStyle(TextFormatting.BLACK),
+                new TranslationTextComponent("text." + MoreChickens.MODID + ".stat.eggTimer", String.format("%.2f",chickenEntity.getLayTimer() / 1200d)).withStyle(TextFormatting.LIGHT_PURPLE),
                 Util.NIL_UUID);
         return ActionResultType.PASS;
 

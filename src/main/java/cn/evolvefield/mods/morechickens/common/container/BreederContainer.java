@@ -26,7 +26,7 @@ public  class BreederContainer extends ContainerBase {
     private int progress;
     private final IIntArray data;
     private static final DecimalFormat FORMATTER = new DecimalFormat("0.0%");
-    public BreederTileEntity breeder;
+    public final BreederTileEntity breeder;
 
     public BreederContainer(@Nullable ContainerType<?> containerType, int id, IInventory playerInventory, IInventory inputInventory, IInventory outputInventory, IIntArray data,BreederTileEntity tileEntity) {
         super(ModContainers.BREEDER_CONTAINER, id, playerInventory, null);

@@ -79,7 +79,7 @@ public class InventoryHandlerHelper {
 
     public static class ItemHandler extends ItemStackHandler
     {
-        protected TileEntity tileEntity;
+        protected final TileEntity tileEntity;
 
         public ItemHandler(int size) {
             this(size, null);

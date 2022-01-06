@@ -26,11 +26,15 @@ public class ModConfig {
             public ForgeConfigSpec.BooleanValue enabled;
         }
 
-        public Map<String, ChickenTypeConfig> chickenType;
-        public ForgeConfigSpec.DoubleValue[] tierOdds;
+        public final Map<String, ChickenTypeConfig> chickenType;
+        public final ForgeConfigSpec.DoubleValue[] tierOdds;
 
-        public ForgeConfigSpec.IntValue chickenEggChance, chickenEggMultiChance,
-                chickenWeight, chickenMin, chickenMax, chickenBreedingTime;
+        public final ForgeConfigSpec.IntValue chickenEggChance;
+        public final ForgeConfigSpec.IntValue chickenEggMultiChance;
+        public final ForgeConfigSpec.IntValue chickenWeight;
+        public final ForgeConfigSpec.IntValue chickenMin;
+        public final ForgeConfigSpec.IntValue chickenMax;
+        public final ForgeConfigSpec.IntValue chickenBreedingTime;
 
 
 

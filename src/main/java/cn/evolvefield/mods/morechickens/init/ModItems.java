@@ -31,9 +31,9 @@ public class ModItems {
     public static Item GRAY_EGG;
     public static Item BROWN_EGG;
 
-    public static Item ITEM_CHICKEN = new ChickenItem();
-    public static Item ITEM_CATCHER = new CatcherItem();
-    public static Item ANALYZER = new AnalyzerItem();
+    public static final Item ITEM_CHICKEN = new ChickenItem();
+    public static final Item ITEM_CATCHER = new CatcherItem();
+    public static final Item ANALYZER = new AnalyzerItem();
 
     public static void registerItems(RegistryEvent.Register<Item> event) {
         final IForgeRegistry<Item> registry = event.getRegistry();

@@ -18,8 +18,8 @@ import java.util.function.Supplier;
 
 public class ScreenBase<T extends Container> extends ContainerScreen<T> {
     public static final int FONT_COLOR = 4210752;
-    protected ResourceLocation texture;
-    protected List<HoverArea> hoverAreas;
+    protected final ResourceLocation texture;
+    protected final List<HoverArea> hoverAreas;
 
     public ScreenBase(ResourceLocation texture, T container, PlayerInventory playerInventory, ITextComponent title) {
         super(container, playerInventory, title);
@@ -34,10 +34,11 @@ public class ScreenBase<T extends Container> extends ContainerScreen<T> {
     }
 
     protected void renderBg(@Nonnull MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
-        RenderSystem.clearColor(1.0F, 1.0F, 1.0F, 1.0F);
-        assert this.minecraft != null;
-        this.minecraft.getTextureManager().bind(this.texture);
-        this.blit(matrixStack, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
+        if (this.minecraft != null) {
+            RenderSystem.clearColor(1.0F, 1.0F, 1.0F, 1.0F);
+            this.minecraft.getTextureManager().bind(this.texture);
+            this.blit(matrixStack, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
+        }
     }
 
     protected void renderLabels(@Nonnull MatrixStack matrixStack, int mouseX, int mouseY) {

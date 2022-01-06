@@ -45,14 +45,14 @@ public class JEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(@Nonnull IRecipeRegistration registration) {
-        assert Minecraft.getInstance().level != null;
-        final RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
-        final World clientWorld = Minecraft.getInstance().level;
-        if (clientWorld != null) {
-            registration.addRecipes(BreederCategory.getBreedingRecipes(), BreederCategory.ID);
-            registerInfoDesc(registration);
+        if (Minecraft.getInstance().level != null) {
+            final RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
+            final World clientWorld = Minecraft.getInstance().level;
+            if (clientWorld != null) {
+                registration.addRecipes(BreederCategory.getBreedingRecipes(), BreederCategory.ID);
+                registerInfoDesc(registration);
+            }
         }
-
     }
 
     @Override

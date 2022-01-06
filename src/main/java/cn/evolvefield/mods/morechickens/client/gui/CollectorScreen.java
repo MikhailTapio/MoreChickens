@@ -29,13 +29,13 @@ public class CollectorScreen extends ContainerScreen<CollectorContainer> {
 
     @Override
     protected void renderBg(@Nonnull MatrixStack p_230450_1_, float p_230450_2_, int p_230450_3_, int p_230450_4_) {
-        RenderSystem.clearColor(1.0F, 1.0F, 1.0F, 1.0F);
-        assert this.minecraft != null;
-        this.minecraft.getTextureManager().bind(CONTAINER_BACKGROUND);
-        int i = (this.width - this.imageWidth) / 2;
-        int j = (this.height - this.imageHeight) / 2;
-        this.blit(p_230450_1_, i, j, 0, 0, this.imageWidth, 3 * 18 + 17);
-        this.blit(p_230450_1_, i, j + 3 * 18 + 17, 0, 126, this.imageWidth, 96);
-
+        if (this.minecraft != null) {
+            RenderSystem.clearColor(1.0F, 1.0F, 1.0F, 1.0F);
+            this.minecraft.getTextureManager().bind(CONTAINER_BACKGROUND);
+            int i = (this.width - this.imageWidth) / 2;
+            int j = (this.height - this.imageHeight) / 2;
+            this.blit(p_230450_1_, i, j, 0, 0, this.imageWidth, 3 * 18 + 17);
+            this.blit(p_230450_1_, i, j + 3 * 18 + 17, 0, 126, this.imageWidth, 96);
+        }
     }
 }

@@ -28,9 +28,9 @@ import java.util.function.Supplier;
 public class ModBlocks {
 
     public static Block[] BAITS;
-    public static Block BLOCK_ROOST = new RoostBlock();
-    public static Block BLOCK_BREEDER = new BreederBlock();
-    public static Block BLOCK_COLLECTOR = new CollectorBlock();
+    public static final Block BLOCK_ROOST = new RoostBlock();
+    public static final Block BLOCK_BREEDER = new BreederBlock();
+    public static final Block BLOCK_COLLECTOR = new CollectorBlock();
 
 
     public static void registerBlocks(RegistryEvent.Register<Block> event) {

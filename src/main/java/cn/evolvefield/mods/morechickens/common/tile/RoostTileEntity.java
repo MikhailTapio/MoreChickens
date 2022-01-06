@@ -44,7 +44,7 @@ public class RoostTileEntity extends FakeWorldTileEntity implements ITickableTil
 
 
     private ItemStack chickenItem;
-    public NonNullList<ItemStack> outputInventory;
+    public final NonNullList<ItemStack> outputInventory;
     private AnimalEntity chickenEntity;
     final Random rand = new Random();
     private int progress;
@@ -135,6 +135,7 @@ public class RoostTileEntity extends FakeWorldTileEntity implements ITickableTil
         return !chickenItem.isEmpty();
     }
 
+    @Nullable
     public AnimalEntity getChickenEntity() {
         if (chickenEntity == null && !chickenItem.isEmpty()) {
             chickenEntity = getChicken(level, chickenItem);
