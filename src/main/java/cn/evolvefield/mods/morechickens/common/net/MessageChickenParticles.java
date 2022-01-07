@@ -2,6 +2,7 @@ package cn.evolvefield.mods.morechickens.common.net;
 
 import cn.evolvefield.mods.morechickens.common.tile.BreederTileEntity;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -26,7 +27,11 @@ public class MessageChickenParticles implements Message<MessageChickenParticles>
 
     @Override
     public void executeClientSide(NetworkEvent.Context context) { //TODO check server crash
-        final TileEntity tileEntity = Minecraft.getInstance().level.getBlockEntity(pos);
+        final ClientWorld cw = Minecraft.getInstance().level;
+        if(cw == null){
+            return;
+        }
+        final TileEntity tileEntity = cw.getBlockEntity(pos);
         if (tileEntity instanceof BreederTileEntity) {
             BreederTileEntity breeder = (BreederTileEntity) tileEntity;
             breeder.spawnParticles();

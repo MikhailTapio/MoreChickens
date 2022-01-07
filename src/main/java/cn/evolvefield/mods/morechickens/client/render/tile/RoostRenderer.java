@@ -26,7 +26,7 @@ public class RoostRenderer extends RendererBase<RoostTileEntity> {
             direction = roost.getBlockState().getValue(HorizontalRotatableBlock.FACING);
         }
 
-        if (roost.getChickenEntity() != null) {
+        if (roost.getChickenEntity() != null && chicken != null) {
             matrixStack.pushPose();
             matrixStack.translate(0.4D, 1D / 16D, 0.2D);
             matrixStack.mulPose(Vector3f.YP.rotationDegrees(direction.toYRot()));

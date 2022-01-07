@@ -81,6 +81,7 @@
   "text.chickens.stat.gain": "产出值: %f",
   "text.chickens.stat.growth": "成长度: %f",
   "text.chickens.stat.strength": "基因强度: %f",
+  "text.chickens.stat.probe.eggTimer": "距离产出下个鸡蛋: %f ",
   "text.chickens.stat.eggTimer": "距离产出下个鸡蛋: %f 分钟",
   
 
@@ -93,10 +94,10 @@
   "text.chickens.name.sand": "沙子鸡",
   "text.chickens.name.oak": "原木鸡",
   "text.chickens.name.flint": "燧石鸡",
-  "text.chickens.name.quartz": "下届石英鸡",
+  "text.chickens.name.quartz": "下界石英鸡",
   "text.chickens.name.soul_sand": "灵魂沙鸡",
 
-  "text.chickens.name.clay": "粘土鸡",
+  "text.chickens.name.clay": "黏土鸡",
   "text.chickens.name.leather": "皮革鸡",
   "text.chickens.name.string": "线鸡",
   "text.chickens.name.slime": "史莱姆鸡",
@@ -122,7 +123,7 @@
 
   "text.chickens.name.redstone": "红石鸡",
   "text.chickens.name.iron": "铁鸡",
-  "text.chickens.name.glowstone": "萤石鸡",
+  "text.chickens.name.glowstone": "荧石鸡",
   "text.chickens.name.coal": "煤鸡",
   "text.chickens.name.gunpowder": "火药鸡",
   "text.chickens.name.snowball": "雪球鸡",
@@ -133,7 +134,7 @@
   "text.chickens.name.water": "水鸡",
 
   "text.chickens.name.diamond": "钻石鸡",
-  "text.chickens.name.wart": "地狱疮鸡",
+  "text.chickens.name.wart": "下界疣鸡",
   "text.chickens.name.blaze": "烈焰棒鸡",
   "text.chickens.name.obsidian": "黑曜石鸡",
   "text.chickens.name.prism_shard": "海晶碎片鸡",

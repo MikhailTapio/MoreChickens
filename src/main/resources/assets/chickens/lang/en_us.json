@@ -72,6 +72,7 @@
   "text.chickens.stat.gain": "Gain: %f",
   "text.chickens.stat.growth": "Growth: %f",
   "text.chickens.stat.strength": "Strength: %f",
+  "text.chickens.stat.probe.eggTimer": "Time Until Next Egg: %f ",
   "text.chickens.stat.eggTimer": "Minutes Until Next Egg: %f minutes",
 
 

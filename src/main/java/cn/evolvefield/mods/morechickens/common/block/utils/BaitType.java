@@ -8,6 +8,7 @@ import net.minecraft.command.ICommandSource;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.vector.Vector2f;
 import net.minecraft.util.math.vector.Vector3d;
@@ -16,7 +17,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
@@ -53,9 +53,12 @@ public enum BaitType implements IStringSerializable {
 
 
 
-    @Nullable
     public void createEntity(World world,double x,double y,double z) {
-        world.getServer().getCommands().performCommand(new CommandSource(ICommandSource.NULL, new Vector3d(x,y,z), Vector2f.ZERO,(ServerWorld) world,4, "",
+        final MinecraftServer s = world.getServer();
+        if(s == null){
+            return;
+        }
+        s.getCommands().performCommand(new CommandSource(ICommandSource.NULL, new Vector3d(x,y,z), Vector2f.ZERO,(ServerWorld) world,4, "",
                 new StringTextComponent(""), Objects.requireNonNull(world.getServer()), null),"summon chickens:base_chicken ~ ~ ~ {Breed:'"+ entityType +"'}");
 
     }

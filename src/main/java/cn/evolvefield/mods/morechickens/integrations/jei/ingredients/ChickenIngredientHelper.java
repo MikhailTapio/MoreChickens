@@ -5,6 +5,7 @@ import cn.evolvefield.mods.morechickens.common.data.ChickenData;
 import cn.evolvefield.mods.morechickens.common.data.custom.ChickenReloadListener;
 import cn.evolvefield.mods.morechickens.init.ModEntities;
 import mezz.jei.api.ingredients.IIngredientHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TranslationTextComponent;
 
 import javax.annotation.Nonnull;
@@ -51,7 +52,8 @@ public class ChickenIngredientHelper implements IIngredientHelper<EntityIngredie
     @Nonnull
     @Override
     public String getResourceId(@Nonnull EntityIngredient type) {
-        return ModEntities.BASE_CHICKEN.get().getRegistryName().getPath();
+        final ResourceLocation rl = ModEntities.BASE_CHICKEN.get().getRegistryName();
+        return (rl != null)?rl.getPath():"";
     }
 
     @Nonnull

@@ -62,7 +62,7 @@ public class AnalyzerItem extends Item {
                 Util.NIL_UUID);
         */
         playerIn.sendMessage(
-                new TranslationTextComponent("text." + MoreChickens.MODID + ".stat.gain", gene.GAIN).withStyle(TextFormatting.BLUE),
+                new TranslationTextComponent("text." + MoreChickens.MODID + ".stat.gain", gene.GAIN).withStyle(TextFormatting.DARK_AQUA),
                 Util.NIL_UUID);
         playerIn.sendMessage(
                 new TranslationTextComponent("text." + MoreChickens.MODID + ".stat.growth", gene.GROWTH).withStyle(TextFormatting.GREEN),

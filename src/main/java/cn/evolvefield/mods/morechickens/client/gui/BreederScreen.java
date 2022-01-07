@@ -45,13 +45,15 @@ public class BreederScreen extends ScreenBase<BreederContainer> {
         }
         if ((mouseX > x + 19 && mouseX < x + 37 && mouseY > y + 25 && mouseY < y + 43) && this.menu.breeder.hasChicken1()) {
             final List<IReorderingProcessor> tooltip = new ArrayList<>();
-            tooltip.add(new TranslationTextComponent("text.chickens.name."+((BaseChickenEntity)this.menu.breeder.getChickenEntity1()).getChickenName()).getVisualOrderText());
+            final BaseChickenEntity bce = this.menu.breeder.getChickenEntity1();
+            if (bce != null)tooltip.add(new TranslationTextComponent("text.chickens.name."+ bce.getChickenName()).getVisualOrderText());
             renderTooltip(matrixStack, tooltip, mouseX - x, mouseY - y);
         }
 
         if ((mouseX > x + 19 && mouseX < x + 37 && mouseY > y + 46 && mouseY < y + 64) && this.menu.breeder.hasChicken2()) {
             final List<IReorderingProcessor> tooltip = new ArrayList<>();
-            tooltip.add(new TranslationTextComponent("text.chickens.name."+((BaseChickenEntity)this.menu.breeder.getChickenEntity2()).getChickenName()).getVisualOrderText());
+            final BaseChickenEntity bce = this.menu.breeder.getChickenEntity2();
+            if (bce != null)tooltip.add(new TranslationTextComponent("text.chickens.name."+ bce.getChickenName()).getVisualOrderText());
             renderTooltip(matrixStack, tooltip, mouseX - x, mouseY - y);
         }
 

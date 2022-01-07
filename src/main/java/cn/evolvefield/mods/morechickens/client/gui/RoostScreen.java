@@ -64,7 +64,7 @@ public class RoostScreen extends ScreenBase<RoostContainer> {
             final int x = getGuiLeft();
             final int y = (height - getYSize()) / 2;
             GuiUtils.drawTexturedModalRect(matrixStack,x, y, 0, 0, getXSize(), getYSize(),100);
-            GuiUtils.drawTexturedModalRect(matrixStack,x + 69, y + 31, 176, 0, getProgressWidth(), 12,100);
+            GuiUtils.drawTexturedModalRect(matrixStack,x + 69, y + 31, 176, 0, getProgressWidth(), 16,100);
             if (this.menu.tileRoost.hasChickenItem()){
                 ChickenRenderer.render(matrixStack,x + 31,y + 32, ChickenRegistry.Types.get(this.menu.tileRoost.getChickenItemName()),minecraft);
                 //this.itemRenderer.renderAndDecorateItem(this.menu.tileRoost.getChickenItem(),x + 31 , y + 32 );

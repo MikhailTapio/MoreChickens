@@ -6,7 +6,8 @@
 		"1": "chickens:blocks/glass",
 		"4": "chickens:blocks/curtain_side",
 		"5": "chickens:blocks/plain_face",
-		"7": "chickens:blocks/hay_floor"
+		"7": "chickens:blocks/hay_floor",
+		"particle": "chickens:blocks/plain_face"
 	},
 	"elements": [
 		{

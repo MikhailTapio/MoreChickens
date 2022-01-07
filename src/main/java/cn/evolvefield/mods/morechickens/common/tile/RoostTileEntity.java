@@ -123,16 +123,18 @@ public class RoostTileEntity extends FakeWorldTileEntity implements ITickableTil
         sync();
     }
 
+    @Nullable
     public ItemStack getChickenItem() {
         return chickenItem;
     }
 
+    @Nullable
     public String getChickenItemName(){
-       return getChickenItem().getOrCreateTag().getString("Name");
+        return getChickenItem() != null ? getChickenItem().getOrCreateTag().getString("Name") : null;
     }
 
     public boolean hasChickenItem() {
-        return !chickenItem.isEmpty();
+        return chickenItem != null &&!chickenItem.isEmpty();
     }
 
     @Nullable
@@ -199,6 +201,9 @@ public class RoostTileEntity extends FakeWorldTileEntity implements ITickableTil
         }
     }
     public boolean canLay() {
+        if (getChickenEntity() == null){
+            return false;
+        }
         if (!hasChickenItem() ) {
             return false;
         }
@@ -233,6 +238,9 @@ public class RoostTileEntity extends FakeWorldTileEntity implements ITickableTil
     }
 
     private void resetTimer() {
+        if(getChickenItem() == null){
+            return;
+        }
         final String type = getChickenItem().getOrCreateTag().getString("Type");
         final String name = getChickenItem().getOrCreateTag().getString("Name");
         final ChickenData data = ChickenUtils.getChickenDataByName(name);
@@ -251,6 +259,9 @@ public class RoostTileEntity extends FakeWorldTileEntity implements ITickableTil
     }
 
     private boolean addLoot() {
+        if(getChickenItem() == null){
+            return false;
+        }
         for (int i = 0; i < outputInventory.size(); i++) {
             if (outputInventory.get(i).isEmpty()) {
                 final String type = getChickenItem().getOrCreateTag().getString("Type");

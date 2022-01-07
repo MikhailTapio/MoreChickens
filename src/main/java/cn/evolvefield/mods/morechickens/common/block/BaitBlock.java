@@ -99,6 +99,8 @@ public class BaitBlock extends ContainerBlock {
         }
     }
 
+
+
     @Override
     public void animateTick(@Nonnull BlockState stateIn, World world, @Nonnull BlockPos pos, @Nonnull Random rand) {
         //if (!ExCompressumConfig.CLIENT.disableParticles.get()) {

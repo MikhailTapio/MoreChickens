@@ -126,13 +126,14 @@ public class BreederTileEntity extends FakeWorldTileEntity implements ITickableT
     }
 
     public boolean hasChicken1() {
-        return !chicken1.isEmpty();
+        return chicken1 !=null && !chicken1.isEmpty();
     }
 
     public boolean hasChicken2() {
-        return !chicken2.isEmpty();
+        return chicken2 != null && !chicken2.isEmpty();
     }
 
+    @Nullable
     public BaseChickenEntity getChickenEntity1() {
         if (chickenEntity1 == null && !chicken1.isEmpty()) {
             chickenEntity1 = getChicken(level, chicken1);
@@ -140,6 +141,7 @@ public class BreederTileEntity extends FakeWorldTileEntity implements ITickableT
         return chickenEntity1;
     }
 
+    @Nullable
     public BaseChickenEntity getChickenEntity2() {
         if (chickenEntity2 == null && !chicken2.isEmpty()) {
             chickenEntity2 = getChicken(level, chicken2);
@@ -250,6 +252,9 @@ public class BreederTileEntity extends FakeWorldTileEntity implements ITickableT
         if(level == null){
             return false;
         }
+        if(getChickenEntity1() == null || getChickenEntity2() == null){
+            return false;
+        }
         for (int i = 0; i < outputInventory.size(); i++) {
             if (outputInventory.get(i).isEmpty()) {
                 final String typeA = getChicken1().getOrCreateTag().getString("Type");
@@ -283,6 +288,9 @@ public class BreederTileEntity extends FakeWorldTileEntity implements ITickableT
     }
 
     public boolean canBreed() {
+        if (getChickenEntity1() == null || getChickenEntity2() == null){
+            return false;
+        }
         if (!hasChicken1() || !hasChicken2()) {
             return false;
         }

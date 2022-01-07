@@ -314,7 +314,7 @@ public class BaseChickenEntity extends ModAnimalEntity implements ITOPInfoEntity
         if (! chicken.isBaby()) {
             if (chicken.type.layTime != 0) {
                 int secs = chicken.layTimer / 20;
-                probeInfo.text(new TranslationTextComponent("text.chickens.stat.eggTimer", String.format("%02d:%02d", secs / 60, secs % 60)));
+                probeInfo.text(new TranslationTextComponent("text.chickens.stat.probe.eggTimer", String.format("%02d:%02d", secs / 60, secs % 60)));
             }
         }
     }
