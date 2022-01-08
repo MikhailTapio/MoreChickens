@@ -10,7 +10,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
@@ -19,7 +18,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
@@ -57,14 +55,15 @@ public class CollectorBlock extends ContainerBlock {
     }
 
     @Override
-    public void destroy(IWorld world, @Nonnull BlockPos blockPos, @Nonnull BlockState state) {
-        final TileEntity tileEntity = world.getBlockEntity(blockPos);
+    public void onRemove(@Nonnull BlockState state1, World world, @Nonnull BlockPos pos, @Nonnull BlockState state2, boolean bool) {
+        final TileEntity tileEntity = world.getBlockEntity(pos);
 
-        if (tileEntity instanceof IInventory) {
-            InventoryHelper.dropItemStack((World) world, blockPos.getX(),blockPos.getY(),blockPos.getZ(), ModBlocks.BLOCK_COLLECTOR.asItem().getDefaultInstance());
+        if (tileEntity instanceof CollectorTileEntity) {
+            InventoryHelper.dropContents(world, pos, ((CollectorTileEntity) tileEntity).getInventory());
+            InventoryHelper.dropItemStack(world, pos.getX(),pos.getY(),pos.getZ(), ModBlocks.BLOCK_COLLECTOR.asItem().getDefaultInstance());
         }
 
-        super.destroy(world, blockPos, state);
+        super.onRemove(state1, world, pos, state2, bool);
     }
 
     @Nullable

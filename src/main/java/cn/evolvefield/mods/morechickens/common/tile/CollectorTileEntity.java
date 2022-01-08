@@ -3,11 +3,13 @@ package cn.evolvefield.mods.morechickens.common.tile;
 
 import cn.evolvefield.mods.morechickens.MoreChickens;
 import cn.evolvefield.mods.morechickens.common.container.CollectorContainer;
+import cn.evolvefield.mods.morechickens.common.container.base.ItemListInventory;
 import cn.evolvefield.mods.morechickens.common.util.InventoryUtil;
 import cn.evolvefield.mods.morechickens.init.ModTileEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
@@ -33,7 +35,7 @@ import javax.annotation.Nullable;
 
 public class CollectorTileEntity extends TileEntity implements ISidedInventory, ITickableTileEntity, INamedContainerProvider, IIntArray {
 
-    private final NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(getContainerSize(), ItemStack.EMPTY);
+    private final NonNullList<ItemStack> inventory = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
     private int searchOffset = 0;
 
     public CollectorTileEntity() {
@@ -255,6 +257,8 @@ public class CollectorTileEntity extends TileEntity implements ISidedInventory, 
         return false;
     }
 
-
+    public IInventory getInventory() {
+        return new ItemListInventory(inventory, this::setChanged);
+    }
 
 }

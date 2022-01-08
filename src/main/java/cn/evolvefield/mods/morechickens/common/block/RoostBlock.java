@@ -19,7 +19,6 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -82,15 +81,17 @@ public class RoostBlock extends HorizontalRotatableBlock {
         NetworkHooks.openGui(player, tileEntity, packetBuffer -> packetBuffer.writeBlockPos(tileEntity.getBlockPos()));
     }
 
+
     @Override
-    public void destroy(IWorld world, @Nonnull BlockPos pos, @Nonnull BlockState state) {
+    public void onRemove(@Nonnull BlockState state1, World world, @Nonnull BlockPos pos, @Nonnull BlockState state2, boolean bool) {
         final TileEntity tileEntity = world.getBlockEntity(pos);
 
         if (tileEntity instanceof RoostTileEntity) {
-            InventoryHelper.dropItemStack((World) world, pos.getX(),pos.getY(),pos.getZ(), ModBlocks.BLOCK_ROOST.asItem().getDefaultInstance());
+            InventoryHelper.dropContents(world, pos, ((RoostTileEntity) tileEntity).getOutputInventory());
+            InventoryHelper.dropItemStack(world, pos.getX(),pos.getY(),pos.getZ(), ModBlocks.BLOCK_ROOST.asItem().getDefaultInstance());
         }
 
-        super.destroy(world, pos, state);
+        super.onRemove(state1, world, pos, state2, bool);
     }
 
     @Nonnull

@@ -20,7 +20,6 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -101,14 +100,16 @@ public class BreederBlock extends HorizontalRotatableBlock  {
 
 
     @Override
-    public void destroy(IWorld world, BlockPos pos, BlockState state) {
+    public void onRemove(@Nonnull BlockState state1, World world, @Nonnull BlockPos pos, @Nonnull BlockState state2, boolean bool) {
         final TileEntity tileEntity = world.getBlockEntity(pos);
 
         if (tileEntity instanceof BreederTileEntity) {
-            InventoryHelper.dropItemStack((World) world, pos.getX(),pos.getY(),pos.getZ(), ModBlocks.BLOCK_BREEDER.asItem().getDefaultInstance());
+            InventoryHelper.dropContents(world, pos, ((BreederTileEntity) tileEntity).getFoodInventory());
+            InventoryHelper.dropContents(world, pos, ((BreederTileEntity) tileEntity).getOutputInventory());
+            InventoryHelper.dropItemStack(world, pos.getX(),pos.getY(),pos.getZ(), ModBlocks.BLOCK_BREEDER.asItem().getDefaultInstance());
         }
 
-        super.destroy(world, pos, state);
+        super.onRemove(state1, world, pos, state2, bool);
     }
 
     @Nonnull
