@@ -11,7 +11,6 @@ import cn.evolvefield.mods.morechickens.init.ModContainers;
 import cn.evolvefield.mods.morechickens.init.ModEntities;
 import cn.evolvefield.mods.morechickens.init.ModTileEntities;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -45,7 +44,7 @@ public class RoostTileEntity extends FakeWorldTileEntity implements ITickableTil
 
     private ItemStack chickenItem;
     public final NonNullList<ItemStack> outputInventory;
-    private AnimalEntity chickenEntity;
+    private BaseChickenEntity chickenEntity;
     final Random rand = new Random();
     private int progress;
     private int timeElapsed = 0;
@@ -85,15 +84,17 @@ public class RoostTileEntity extends FakeWorldTileEntity implements ITickableTil
         chickenItem = ItemStack.EMPTY;
     }
 
-    public AnimalEntity getChicken(World world, ItemStack stack) {
+    public BaseChickenEntity getChicken(World world, ItemStack stack) {
         final CompoundNBT compound = stack.getOrCreateTag();
-        final String type = compound.getString("Type");
-        AnimalEntity chicken;
+        //final String type = compound.getString("Type");
+        //AnimalEntity chicken;
+        /*
         if(type.equals("vanilla")){
             chicken = new ChickenEntity(EntityType.CHICKEN,world);
             return chicken;
         }
-        chicken = new BaseChickenEntity(ModEntities.BASE_CHICKEN.get(), world);
+        */
+        final BaseChickenEntity chicken = new BaseChickenEntity(ModEntities.BASE_CHICKEN.get(), world);
         chicken.readAdditionalSaveData(compound);
         return chicken;
     }

@@ -64,19 +64,19 @@ public class ChickenItem extends Item {
         //final CompoundNBT chickenTag = chickenItem.getTagElement("ChickenData");
         final MinecraftServer mcs = world.getServer();
         if (!world.isClientSide && mcs != null) {
-            if(typeTag.equals("vanilla")){
-                final ChickenEntity chicken =  new ChickenEntity(EntityType.CHICKEN,world);
+            if (typeTag.equals("modded")) {
+                final CompoundNBT nbt = chickenItem.getTag();
+                if (nbt == null)
+                    return ActionResultType.PASS;
+                final BaseChickenEntity chicken = new BaseChickenEntity(ModEntities.BASE_CHICKEN.get(), world);
                 chicken.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
                 chicken.finalizeSpawn(mcs.overworld(), world.getCurrentDifficultyAt(pos), SpawnReason.SPAWN_EGG, null, null);
-                mcs.overworld().addFreshEntity(chicken);
-            }
-            else if(typeTag.equals("modded")) {
-                final CompoundNBT nbt = chickenItem.getTag();if (nbt == null)
-                    return ActionResultType.PASS;
-                final BaseChickenEntity chicken = new BaseChickenEntity(ModEntities.BASE_CHICKEN.get(),world);
-                chicken.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
-                chicken.finalizeSpawn(mcs.overworld(),world.getCurrentDifficultyAt(pos), SpawnReason.SPAWN_EGG,null,null);
                 chicken.readAdditionalSaveData(nbt);
+                mcs.overworld().addFreshEntity(chicken);
+            } else {
+                final ChickenEntity chicken = new ChickenEntity(EntityType.CHICKEN, world);
+                chicken.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+                chicken.finalizeSpawn(mcs.overworld(), world.getCurrentDifficultyAt(pos), SpawnReason.SPAWN_EGG, null, null);
                 mcs.overworld().addFreshEntity(chicken);
             }
             chickenItem.shrink(1);

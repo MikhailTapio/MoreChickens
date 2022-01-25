@@ -7,6 +7,7 @@ import cn.evolvefield.mods.morechickens.init.ModItems;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -15,7 +16,6 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
@@ -55,6 +55,31 @@ public class CatcherItem extends Item {
         final World world = entity.level;
         final Vector3d pos = new Vector3d(entity.getX(), entity.getY(), entity.getZ());
         if(entity instanceof ChickenEntity) {
+            final AnimalEntity chickenEntity = (AnimalEntity) entity;
+            if (entity.isBaby()) {
+                if (world.isClientSide) {
+                    spawnParticles(pos, world, ParticleTypes.SMOKE);
+                }
+                world.playSound(player, pos.x, pos.y, pos.z, SoundEvents.CHICKEN_HURT, entity.getSoundSource(), 1.0F, 1.0F);
+                itemStack.hurtAndBreak(1, player, LivingEntity::animateHurt);
+            } else {
+                if (world.isClientSide) {
+                    spawnParticles(pos, world, ParticleTypes.EXPLOSION);
+                } else {
+                    final ItemStack chickenItem = new ItemStack(ModItems.ITEM_CHICKEN);
+                    final CompoundNBT tagCompound = chickenItem.getOrCreateTagElement("ChickenData");
+                    chickenEntity.addAdditionalSaveData(tagCompound);
+                    chickenEntity.remove(false);
+                    tagCompound.putString("Type", "vanilla");
+                    chickenItem.setTag(tagCompound);
+                    final ItemEntity item = entity.spawnAtLocation(chickenItem, 1.0F);
+                    if (item != null) {
+                        item.setDeltaMovement(0, 0.2d, 0);
+                    }
+                }
+                world.playSound(player, pos.x, pos.y, pos.z, SoundEvents.CHICKEN_EGG, entity.getSoundSource(), 1.0F, 1.0F);
+            }
+            /*
             if (world.isClientSide) {
                 spawnParticles(pos, world, ParticleTypes.EXPLOSION);
             } else {
@@ -72,6 +97,7 @@ public class CatcherItem extends Item {
                 }
             }
             world.playSound(player, pos.x, pos.y, pos.z, SoundEvents.CHICKEN_EGG, entity.getSoundSource(), 1.0F, 1.0F);
+            */
             return ActionResultType.SUCCESS;
         }
         else if (entity instanceof BaseChickenEntity) {
@@ -105,12 +131,11 @@ public class CatcherItem extends Item {
 
         player.sendMessage(new TranslationTextComponent("item.chickens.catcher.fail"), Util.NIL_UUID);
         return ActionResultType.FAIL;
-
     }
 
 
     private void spawnParticles(Vector3d pos, World world, IParticleData data) {
-        Random rand = world.random;
+        final Random rand = world.random;
         for (int k = 0; k < 20; ++k) {
             final double xCoord = pos.x + (rand.nextDouble() * 0.6D) - 0.3D;
             final double yCoord = pos.y + (rand.nextDouble() * 0.6D);
